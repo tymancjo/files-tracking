@@ -1,12 +1,15 @@
 # following
 # http://thepythoncorner.com/dev/how-to-create-a-watchdog-in-python-to-look-for-filesystem-changes/
 
-import time, sys
+import time, sys, os
 from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler
 
 def on_created(event):
     print(f"hey, {event.src_path} has been created!")
+    filename, ext = os.path.splitext(event.src_path)
+    print(f"Its the {filename} with the extension {ext}")
+    
 
 def on_deleted(event):
     print(f"what the f**k! Someone deleted {event.src_path}!")
